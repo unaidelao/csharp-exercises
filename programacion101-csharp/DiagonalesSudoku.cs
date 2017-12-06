@@ -14,27 +14,57 @@
  {
    public static void Main(string[] args)
    {
+     // Constante para la longitud de la matriz.
+     const int longitud = 3;
      // Declaración del array de 3x3.
-     int[,] sudoku = new int[3,3];
+     int[,] sudoku = new int[longitud,longitud];
 
      // Se pide al usuario que rellene el array.
      Console.WriteLine("Vamos a rellenar un array de 3x3");
 
-     for (int i = 0; i < 3; i++)
+     for (int i = 0; i < longitud; i++)
      {
-       for (int j = 0; j < 3; j++)
+       for (int j = 0; j < longitud; j++)
        {
          Console.Write("Valor de la celda [{0},{1}]: ", i, j);
          sudoku[i,j] = int.Parse(Console.ReadLine());
        }
      }
 
-     // DEBUG: imprimir el array
-     foreach (int n in sudoku)
+     // Imprimir el array.
+     Console.WriteLine("\nMatriz tipo sudoku impresa.");
+     for (int i = 0; i < longitud; i++)
      {
-       Console.Write("[" + n + "]" + " ");
+       for (int j = 0; j < longitud; j++)
+       {
+         Console.Write("[" + sudoku[i,j] + "]" + " ");
+       }
+       Console.WriteLine();
      }
 
-     // Falta imprimir la suma de las dos diagonales.
+     // Suma de las diagonales.
+     int sumaDiagonal1 = 0;
+     int sumaDiagonal2 = 0;
+
+     for (int i = 0; i < longitud; i++)
+     {
+       for (int j = 0; j < longitud; j ++)
+       {
+         if (i == j)
+         {
+           sumaDiagonal1 += sudoku[i,j];
+         }
+         if (i + j == longitud - 1)
+         {
+           sumaDiagonal2 += sudoku[i,j];
+         }
+       }
+     }
+
+     // Resultado.
+     Console.WriteLine("Suma de la primera diagonal: {0}", sumaDiagonal1);
+     Console.WriteLine("Suma de la segunda diagonal: {0}", sumaDiagonal2);
+     Console.WriteLine("Suma de las dos diagonales: {0}",
+     sumaDiagonal1 + sumaDiagonal2);
    }
  }
